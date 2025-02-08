@@ -1,3 +1,4 @@
+# pylint: disable=too-few-public-methods
 """Calculation class to perform arithmetic operations """
 class Calculation:
     """Function that takes two parameters and returns their operation result"""

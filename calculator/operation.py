@@ -3,16 +3,16 @@ def addition(first_term, second_term):
     """adding two numbers"""
     return first_term + second_term
 
-def subtraction(minuend, subtrahend):
+def subtraction(first_term, second_term):
     """substracting two numbers"""
-    return minuend - subtrahend
+    return first_term - second_term
 
-def multiplication(multiplicand, multiplier):
+def multiplication(first_term, second_term):
     """multipling two numbers"""
-    return multiplicand * multiplier
+    return first_term * second_term
 
-def division(dividend, divisor):
+def division(first_term, second_term):
     """dividing two numbers and throwing error if divided by 0"""
-    if divisor == 0:
+    if second_term == 0:
         raise ValueError("Division by zero is not allowed")
-    return dividend / divisor
+    return first_term / second_term
