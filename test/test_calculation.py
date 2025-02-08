@@ -1,4 +1,5 @@
 '''Operations Testing Module'''
+import pytest
 from calculator.operation import addition, multiplication, subtraction, division
 
 def test_operation_addition():
@@ -20,3 +21,8 @@ def test_operation_division():
     '''Verify division operation'''    
     result = division(20, 4)
     assert result == 5
+
+def test_division_by_zero():
+    """Test that division by zero raises ValueError"""
+    with pytest.raises(ValueError):
+        division(10, 0)
