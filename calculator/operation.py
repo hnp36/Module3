@@ -1,18 +1,19 @@
+from decimal import Decimal
 """My arithmetic operation"""
-def addition(first_term, second_term):
+def addition(value1:Decimal, value2:Decimal)-> Decimal:
     """adding two numbers"""
-    return first_term + second_term
+    return value1 + value2
 
-def subtraction(first_term, second_term):
+def subtraction(value1:Decimal, value2:Decimal)-> Decimal:
     """substracting two numbers"""
-    return first_term - second_term
+    return value1 - value2
 
-def multiplication(first_term, second_term):
+def multiplication(value1:Decimal, value2:Decimal)-> Decimal:
     """multipling two numbers"""
-    return first_term * second_term
+    return value1 * value2
 
-def division(first_term, second_term):
+def division(value1:Decimal, value2:Decimal)-> Decimal:
     """dividing two numbers and throwing error if divided by 0"""
-    if second_term == 0:
-        raise ValueError("Division by zero is not allowed")
-    return first_term / second_term
+    if value2 == 0:
+        raise ValueError("Cannot divide by zero")
+    return value1 / value2
