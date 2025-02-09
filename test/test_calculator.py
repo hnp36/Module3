@@ -1,8 +1,8 @@
 '''Advanced Calculator Testing Module'''
-import pytest
 from decimal import Decimal
+import pytest
 from calculator import Calculator
-from calculator.operation import addition, subtraction, multiplication, division
+
 
 def test_calculator_addition():
     '''Test the static addition method of Calculator'''    

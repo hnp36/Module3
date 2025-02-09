@@ -1,6 +1,6 @@
 '''Operations Testing Module'''
-import pytest
 from decimal import Decimal
+import pytest
 from calculator.calculation import Calculation
 from calculator.operation import addition, multiplication, subtraction, division
 

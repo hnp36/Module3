@@ -1,5 +1,5 @@
+'''Advanced Calculator'''
 from decimal import Decimal
-"""My arithmetic operation"""
 def addition(value1:Decimal, value2:Decimal)-> Decimal:
     """adding two numbers"""
     return value1 + value2

@@ -1,18 +1,20 @@
-"""MY Calculator operators"""
+"""Calculator module providing basic arithmetic operations."""
+from decimal import Decimal
+from typing import Callable
+
 from calculator.operation import addition, subtraction, multiplication, division
 from calculator.calculation import Calculation
-from decimal import Decimal
-from typing import Callable 
 
 class Calculator:
     """MY Calculator class"""
-    
+
     @staticmethod
-    def execute_operation(value1: Decimal, value2: Decimal, operation: Callable[[Decimal, Decimal], Decimal]) -> Decimal:
+    def execute_operation(value1: Decimal, value2: Decimal,
+                           operation: Callable[[Decimal, Decimal], Decimal]) -> Decimal:
         """Create and perform a calculation, then return the result."""
         calculation = Calculation.create(value1, value2, operation)
         return calculation.perform()
-   
+
     @staticmethod
     def perform_addition(value1: Decimal, value2: Decimal) -> Decimal:
         """My Addition"""
