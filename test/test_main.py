@@ -17,7 +17,7 @@ from main import calculate_and_print
     ("a", "3", 'addition', "Invalid number input: a or 3 is not a valid number."),  # Testing invalid number input
     ("5", "b", 'subtraction', "Invalid number input: 5 or b is not a valid number.")  # Testing another invalid number input
 ])
-def test_calculate_and_print(num1_str, num2_str, operation_key, expected_output, capsys):
-    calculate_and_print(num1_str, num2_str, operation_key)
+def test_calculate_and_print(value1_str, value2_str, operation_key, expected_output, capsys):
+    calculate_and_print(value1_str, value2_str, operation_key)
     captured = capsys.readouterr()
     assert captured.out.strip() == expected_output
