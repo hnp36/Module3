@@ -16,12 +16,12 @@ TEST_PARAMETERS = [
 ]
 
 @pytest.mark.parametrize(
-    "value1, value2, arithmetic_operation, expected_result",
+    "num1, num2, operation, expected_result",
     TEST_PARAMETERS
 )
-def test_perform_operations(value1, value2, arithmetic_operation, expected_result):
+def test_perform_operations(num1, num2, operation, expected_result):
     """Test calculation operations with different inputs."""
-    calculation = Calculation(value1, value2, arithmetic_operation)
+    calculation = Calculation(num1, num2, operation)
     assert calculation.execute() == expected_result
 
 def test_calculation_repr_method():

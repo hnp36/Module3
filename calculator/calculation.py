@@ -1,5 +1,6 @@
 # pylint: disable=too-few-public-methods
 """Module for handling arithmetic calculations and maintaining calculation history."""
+
 from decimal import Decimal
 from typing import Callable, List
 
