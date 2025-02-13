@@ -1,36 +1,42 @@
+"""My calculator3"""
 import sys
-from calculator import Calculator
 from decimal import Decimal, InvalidOperation
+from calculator import Calculator
 
-def perform_calculation(value1_str, value2_str, operation_key):
+
+def calculate_and_print(value1_str, value2_str, operation_key):
+    """Perform calculation and print result"""
     operation_lookup = {
-        'addition': Calculator.add,
-        'subtraction': Calculator.subtract,
-        'multiplication': Calculator.multiply,
-        'division': Calculator.divide
+        'addition': Calculator.add_numbers,
+        'subtraction': Calculator.subtract_numbers,
+        'multiplication': Calculator.multiply_numbers,
+        'division': Calculator.divide_numbers
     }
-    
+
     try:
-        value1_dec, value2_dec = map(Decimal, [value1_str, value2_str])
-        operation_func = operation_lookup.get(operation_key)
-        if operation_func:
-            print(f"The result of {value1_str} {operation_key} {value2_str} is equal to {operation_func(value1_dec, value2_dec)}")
-        else:
+        value1 = Decimal(value1_str)
+        value2 = Decimal(value2_str)
+        if operation_key not in operation_lookup:
             print(f"Unknown operation: {operation_key}")
+            return
+
+        try:
+            result = operation_lookup[operation_key](value1, value2)
+            print(f"The result of {value1_str} {operation_key} {value2_str} is equal to {result}")
+        except ValueError as e:
+            print(f"An error occurred: {str(e)}")
+
     except InvalidOperation:
         print(f"Invalid number input: {value1_str} or {value2_str} is not a valid number.")
-    except ZeroDivisionError:
-        print("Error: Division by zero.")
-    except Exception as e:
-        print(f"An error occurred: {e}")
 
-def execute():
+def main():
+    """main method calling"""
     if len(sys.argv) != 4:
         print("Usage: python calculator_main.py <number1> <number2> <operation>")
         sys.exit(1)
-    
+
     _, value1, value2, operation = sys.argv
-    perform_calculation(num1, num2, operation)
+    calculate_and_print(value1, value2, operation)
 
 if __name__ == '__main__':
-    execute()
+    main()

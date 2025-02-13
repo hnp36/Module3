@@ -1,7 +1,7 @@
 '''My Calculator Test Suite'''
 from decimal import Decimal
 import pytest
-from calculator.calculation import Calculation
+from calculator.calculation import Calculation #  no need for 'Calculations'
 from calculator.operation import addition, subtraction
 
 @pytest.fixture(name="setup_calculations")

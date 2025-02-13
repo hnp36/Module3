@@ -1,36 +1,37 @@
 """Calculator module providing basic arithmetic operations."""
 from decimal import Decimal
 from typing import Callable
-
 from calculator.operation import addition, subtraction, multiplication, division
 from calculator.calculation import Calculation
+from calculator.calculations import Calculations
 
 class Calculator:
-    """MY Calculator class"""
+    """Calculator class"""
 
     @staticmethod
     def execute_operation(value1: Decimal, value2: Decimal,
-                           operation: Callable[[Decimal, Decimal], Decimal]) -> Decimal:
+                         operation: Callable[[Decimal, Decimal], Decimal]) -> Decimal:
         """Create and perform a calculation, then return the result."""
         calculation = Calculation.create(value1, value2, operation)
+        Calculations.add_calculation(calculation)
         return calculation.perform()
 
     @staticmethod
-    def perform_addition(value1: Decimal, value2: Decimal) -> Decimal:
-        """My Addition"""
+    def add_numbers(value1: Decimal, value2: Decimal) -> Decimal:
+        """Addition operation"""
         return Calculator.execute_operation(value1, value2, addition)
 
     @staticmethod
-    def perform_subtraction(value1: Decimal, value2: Decimal) -> Decimal:
-        """My Substraction"""
+    def subtract_numbers(value1: Decimal, value2: Decimal) -> Decimal:
+        """Subtraction operation"""
         return Calculator.execute_operation(value1, value2, subtraction)
 
     @staticmethod
-    def perform_multiplication(value1: Decimal, value2: Decimal) -> Decimal:
-        """My Multiplication"""
+    def multiply_numbers(value1: Decimal, value2: Decimal) -> Decimal:
+        """Multiplication operation"""
         return Calculator.execute_operation(value1, value2, multiplication)
 
     @staticmethod
-    def perform_division(value1: Decimal, value2: Decimal) -> Decimal:
-        """My Division"""
+    def divide_numbers(value1: Decimal, value2: Decimal) -> Decimal:
+        """Division operation"""
         return Calculator.execute_operation(value1, value2, division)

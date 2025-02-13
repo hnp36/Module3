@@ -1,13 +1,11 @@
-# pylint: disable=too-few-public-methods
-"""Module for handling arithmetic calculations and maintaining calculation history."""
-
+"""Module for handling arithmetic calculations."""
 from decimal import Decimal
-from typing import Callable, List
+from typing import Callable
 
 class Calculation:
-    """Calculation class to perform arithmetic operations"""
+    """A class to represent a calculation operation between two decimal values."""
 
-    history: List["Calculation"] = []
+    history = [] # Class-level variable to hold history of calculations
 
     def __init__(self, value1: Decimal, value2: Decimal,
                  operation: Callable[[Decimal, Decimal], Decimal]):
@@ -16,53 +14,24 @@ class Calculation:
         self.value2 = value2
         self.operation = operation
 
+    def execute(self) -> Decimal:
+        """Execute the stored calculation"""
+        return self.perform()
+
     @staticmethod
     def create(value1: Decimal, value2: Decimal,
-                operation: Callable[[Decimal, Decimal], Decimal]) -> "Calculation":
+               operation: Callable[[Decimal, Decimal], Decimal]):
         """Create a new calculation instance"""
-        calculation = Calculation(value1, value2, operation)
-        Calculation.history.append(calculation)
-        return calculation
+        return Calculation(value1, value2, operation)
 
     def perform(self) -> Decimal:
         """Execute the calculation"""
-
         return self.operation(self.value1, self.value2)
-
-    def execute(self) -> Decimal:
-        """Execute the calculation"""
-        return self.perform()
+    @classmethod
+    def clear_history(cls):
+        """Clears the calculation history."""
+        cls.history = []
 
     def __repr__(self) -> str:
         """Return string representation of the calculation"""
         return f"Calculation({self.value1}, {self.value2}, {self.operation.__name__[:3]})"
-
-    @classmethod
-    def get_history(cls) -> List["Calculation"]:
-        """Get calculation history"""
-        return cls.history
-
-    @classmethod
-    def clear_history(cls) -> None:
-        """Clear calculation history"""
-        cls.history.clear()
-
-    @classmethod
-    def get_latest_calculation(cls) -> "Calculation":
-        """Get the most recent calculation"""
-        return cls.history[-1] if cls.history else None
-
-    @classmethod
-    def add_calculation(cls, calculation: "Calculation") -> None:
-        """Add a calculation to history"""
-        cls.history.append(calculation)
-
-    @classmethod
-    def get_all_calculations(cls) -> List["Calculation"]:
-        """Get all calculations"""
-        return cls.history
-
-    @classmethod
-    def find_calculations_by_operation(cls, operation_name: str) -> List["Calculation"]:
-        """Find calculations by operation type"""
-        return [calc for calc in cls.history if calc.operation.__name__.startswith(operation_name)]
