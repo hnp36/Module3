@@ -1,9 +1,9 @@
-"""Calculator module providing basic arithmetic operations."""
+"""My Calculator"""
 from decimal import Decimal
 from typing import Callable
-from calculator.operation import addition, subtraction, multiplication, division
-from calculator.calculation import Calculation
-from calculator.calculations import Calculations
+from .operation import addition, subtraction, multiplication, division
+from .calculation import Calculation
+from .calculations import Calculations
 
 class Calculator:
     """Calculator class"""

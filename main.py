@@ -3,7 +3,6 @@ import sys
 from decimal import Decimal, InvalidOperation
 from calculator import Calculator
 
-
 def calculate_and_print(value1_str, value2_str, operation_key):
     """Perform calculation and print result"""
     operation_lookup = {
@@ -39,4 +38,5 @@ def main():
     calculate_and_print(value1, value2, operation)
 
 if __name__ == '__main__':
-    main()
+    from calculator.commands import start
+    start()
