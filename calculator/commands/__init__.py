@@ -3,11 +3,11 @@ This module defines the CommandHandler class,
 which manages and executes various calculator commands. 
 It also includes a start function to launch a command-line interface (REPL) for user interaction."""
 import sys
-from .addition import AdditionCommand
-from .substraction import SubtractionCommand
-from .multiplication import MultiplicationCommand
-from .division import DivisionCommand
-from .menu_command import MenuCommand
+from ..plugins.addition import AdditionCommand
+from ..plugins.substraction import SubtractionCommand
+from ..plugins.multiplication import MultiplicationCommand
+from ..plugins.division import DivisionCommand
+from ..plugins.menu_command import MenuCommand
 
 class CommandHandler:
     """CommandHandler class manages the registration and execution of commands."""
