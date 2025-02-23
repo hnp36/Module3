@@ -10,9 +10,8 @@ special commands like 'exit' and 'help'.
 import sys
 import importlib
 import pkgutil
-import inspect
-import calculator.plugins  # Import the plugins package
-from calculator.commands.command import Command  # Import Command class
+import calculator.plugins
+from calculator.commands.command import Command
 
 class CommandHandler:
     """CommandHandler dynamically loads and executes commands from the plugins folder."""
@@ -26,11 +25,14 @@ class CommandHandler:
         """Dynamically load command classes from the plugins folder."""
         package = calculator.plugins  # The plugin package
         for _, module_name, _ in pkgutil.iter_modules(package.__path__, package.__name__ + "."):
-            module = importlib.import_module(module_name)  # Import the module dynamically
-            for name, obj in inspect.getmembers(module):
-                if inspect.isclass(obj) and issubclass(obj, Command) and hasattr(obj, "execute"):
-                    command_name = name.replace("Command", "").lower()  # (AdditionCommand → add)
-                    self.register_command(command_name, obj())
+            try:
+                module = importlib.import_module(module_name)  # Import the module dynamically
+                for name, obj in vars(module).items():
+                    if isinstance(obj, type) and issubclass(obj, Command) and obj is not Command:
+                        command_name = name.replace("Command", "").lower() # AdditionCommand → add
+                        self.register_command(command_name, obj())
+            except ImportError as e:
+                print(f"Error loading module {module_name}: {e}")
 
     def register_command(self, command_name, command):
         """Registers a command in the command dictionary."""
