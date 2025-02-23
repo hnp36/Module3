@@ -5,7 +5,7 @@ This module implements the subtraction operation command for the calculator appl
 """
 # pylint: disable=too-few-public-methods
 from decimal import Decimal, InvalidOperation
-from calculator.commands.command import Command
+from calculator.commands.command_handler import Command
 from calculator import Calculator
 
 class SubtractionCommand(Command):
@@ -20,9 +20,5 @@ class SubtractionCommand(Command):
             print(f"Result: {result}")
         except InvalidOperation:  # Catches Decimal conversion errors
             print("Invalid input! Please enter valid numbers.")
-        except ValueError as e:
-            print(f"Input error: {e}")
-        except ArithmeticError as e:  # Catches division-related errors (not likely for subtraction)
-            print(f"Math error: {e}")
         except Exception as e:  # pylint: disable=broad-exception-caught
             print(f"Unexpected error: {e}")

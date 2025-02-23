@@ -1,5 +1,4 @@
-"""
-This module defines the CommandHandler class, 
+"""This module defines the CommandHandler class, 
 which manages and executes various calculator commands. 
 It also includes a start function to launch a command-line interface (REPL) for user interaction."""
 import sys
@@ -51,7 +50,7 @@ def start():
     MenuCommand().execute()
 
     while True:
-        try:
+        try: #REPL Read, Evaluate , Print , Loop
             command = input("calculator> ").strip()
             command_handler.execute_command(command)
         except KeyboardInterrupt:

@@ -1,4 +1,6 @@
-""" conftest.py"""
+""" This module defines utility functions and pytest hooks to generate test cases dynamically
+for calculator operations. It uses the Faker library to generate random numbers and supports
+customization via the `--record_count` command-line argument. """
 from decimal import Decimal
 from faker import Faker
 from calculator.operation import addition, subtraction, multiplication, division
@@ -44,7 +46,7 @@ def pytest_addoption(parser):
                      default=5, type=int, help="Number of test records to generate")
 
 def pytest_generate_tests(metafunc):
-    """Generate test cases dynamically based on the `record_count` argument."""
+    """Generate test cases dynamically based on the record_count argument."""
     if {"value1", "value2", "expected_result"}.intersection(set(metafunc.fixturenames)):
         record_count = metafunc.config.getoption("record_count")
         test_cases = list(create_test_cases(record_count))
