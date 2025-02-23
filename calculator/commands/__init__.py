@@ -1,7 +1,8 @@
 """
 This module defines the CommandHandler class, 
 which manages and executes various calculator commands. 
-It also includes a start function to launch a command-line interface (REPL) for user interaction."""
+It also includes a start function to launch a command-line interface (REPL) for user interaction.
+"""
 import sys
 from .addition import AdditionCommand
 from .substraction import SubtractionCommand
@@ -35,16 +36,18 @@ class CommandHandler:
         else:
             print(f"Unknown command: {command_input}")
 
+    def initialize_default_commands(self):
+        """Initialize the default calculator commands."""
+        self.register_command("add", AdditionCommand())
+        self.register_command("subtract", SubtractionCommand())
+        self.register_command("multiply", MultiplicationCommand())
+        self.register_command("divide", DivisionCommand())
+        self.register_command("menu", MenuCommand())
+
 def start():
     """Start the calculator REPL"""
     command_handler = CommandHandler()
-
-    # Register commands
-    command_handler.register_command("add", AdditionCommand())
-    command_handler.register_command("subtract", SubtractionCommand())
-    command_handler.register_command("multiply", MultiplicationCommand())
-    command_handler.register_command("divide", DivisionCommand())
-    command_handler.register_command("menu", MenuCommand())
+    command_handler.initialize_default_commands()
 
     print("\nWelcome to Calculator!")
     print("Type 'help' for available commands or 'exit' to quit.")
