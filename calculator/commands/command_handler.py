@@ -3,17 +3,16 @@ CommandHandler Module
 
 This module defines the CommandHandler class, which dynamically loads and executes commands
 from the plugins folder. It supports registering commands, executing them, and handling
-special commands like 'exit' and 'help'."""
+special commands like 'exit' and 'help'.
+"""
+
+# pylint: disable=broad-exception-caught
 import sys
 import importlib
 import pkgutil
 import inspect
 import calculator.plugins  # Import the plugins package
-from ..plugins.addition import AdditionCommand
-from ..plugins.substraction import SubtractionCommand
-from ..plugins.multiplication import MultiplicationCommand
-from ..plugins.division import DivisionCommand
-from ..plugins.menu_command import MenuCommand
+from calculator.commands.command import Command  # Import Command class
 
 class CommandHandler:
     """CommandHandler dynamically loads and executes commands from the plugins folder."""
@@ -29,8 +28,8 @@ class CommandHandler:
         for _, module_name, _ in pkgutil.iter_modules(package.__path__, package.__name__ + "."):
             module = importlib.import_module(module_name)  # Import the module dynamically
             for name, obj in inspect.getmembers(module):
-                if inspect.isclass(obj) and hasattr(obj, "execute"):  # has an execute() method
-                    command_name = name.replace("Command", "").lower()  #(AdditionCommand → add)
+                if inspect.isclass(obj) and issubclass(obj, Command) and hasattr(obj, "execute"):
+                    command_name = name.replace("Command", "").lower()  # (AdditionCommand → add)
                     self.register_command(command_name, obj())
 
     def register_command(self, command_name, command):
@@ -57,7 +56,13 @@ class CommandHandler:
         if command:
             try:
                 command.execute(*args)
-            except Exception as e: # pylint: disable=broad-exception-caught
-                print(f"Error executing '{command_name}': {e}")
+            except ValueError as e:
+                print(f"Value Error executing '{command_name}': {e}")
+            except TypeError as e:
+                print(f"Type Error executing '{command_name}': {e}")
+            except AttributeError as e:
+                print(f"Attribute Error: {e}")
+            except Exception as e:
+                print(f"Unexpected error: {e}")
         else:
             print(f"Unknown command: {command_name}")

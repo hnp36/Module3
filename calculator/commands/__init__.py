@@ -1,42 +1,22 @@
-"""This module defines the CommandHandler class, 
-which manages and executes various calculator commands. 
-It also includes a start function to launch a command-line interface (REPL) for user interaction."""
+"""
+Start the calculator REPL (Read-Eval-Print Loop).
+
+This function initializes the CommandHandler and registers available commands 
+such as addition, subtraction, multiplication, division, and menu display.
+"""
+
+# Import necessary modules
 import sys
-from ..plugins.addition import AdditionCommand
-from ..plugins.substraction import SubtractionCommand
-from ..plugins.multiplication import MultiplicationCommand
-from ..plugins.division import DivisionCommand
-from ..plugins.menu_command import MenuCommand
-
-class CommandHandler:
-    """CommandHandler class manages the registration and execution of commands."""
-
-    def __init__(self):
-        """Initializes an empty command registry."""
-        self.commands = {}
-
-    def register_command(self, command_name, command):
-        """Registers a command in the command dictionary."""
-        self.commands[command_name] = command
-
-    def execute_command(self, command_input):
-        """Executes a registered command or handles special commands like 'exit' and 'help'."""
-        if command_input.lower() == 'exit':
-            print("Goodbye!")
-            sys.exit()
-        elif command_input.lower() == 'help':
-            print("Available commands:", ", ".join(self.commands.keys()))
-            return
-
-        command = self.commands.get(command_input.lower())
-        if command:
-            command.execute()
-        else:
-            print(f"Unknown command: {command_input}")
+from calculator.plugins.addition import AdditionCommand
+from calculator.plugins.substraction import SubtractionCommand
+from calculator.plugins.multiplication import MultiplicationCommand
+from calculator.plugins.division import DivisionCommand
+from calculator.plugins.menu_command import MenuCommand
+from calculator.commands.command_handler import CommandHandler
 
 def start():
     """Start the calculator REPL"""
-    command_handler = CommandHandler()
+    command_handler = CommandHandler()  # Use the imported CommandHandler
 
     # Register commands
     command_handler.register_command("add", AdditionCommand())
@@ -50,7 +30,7 @@ def start():
     MenuCommand().execute()
 
     while True:
-        try: #REPL Read, Evaluate , Print , Loop
+        try:
             command = input("calculator> ").strip()
             command_handler.execute_command(command)
         except KeyboardInterrupt:
