@@ -1,13 +1,10 @@
 """ MenuCommand Module
 This module implements the menu display functionality for the calculator application."""
-
+# pylint: disable=too-few-public-methods
 from calculator.commands.command import Command
 
-# pylint: disable=too-few-public-methods
 class MenuCommand(Command):
-    """
-    This class represents a command to display the calculator menu, 
-    listing available operations and commands."""
+    """Displays the calculator menu."""
 
     def execute(self):
         """Display the calculator menu"""

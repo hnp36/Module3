@@ -34,13 +34,9 @@ def start():
             command = input("calculator> ").strip()
             command_handler.execute_command(command)
         except KeyboardInterrupt:
-            print("\nGoodbye!")
+            print("\n >> Goodbye!")
             break
-        except ValueError as e:
-            print(f"Invalid input: {e}")
         except KeyError as e:
             print(f"Command not found: {e}")
-        except RuntimeError as e:
-            print(f"Runtime error: {e}")
         except (ImportError, AttributeError) as e:
             print(f"Module or command error: {e}")

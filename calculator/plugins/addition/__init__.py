@@ -19,7 +19,5 @@ class AdditionCommand(Command):
             print(f"Result: {result}")
         except InvalidOperation:  # Catches Decimal conversion errors
             print("Invalid input! Please enter valid numbers.")
-        except ValueError as e:
-            print(f"Input error: {e}")
         except Exception as e:  # pylint: disable=broad-exception-caught
             print(f"Unexpected error: {e}")

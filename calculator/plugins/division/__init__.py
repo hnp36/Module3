@@ -21,9 +21,5 @@ class DivisionCommand(Command):
             print(f"Result: {result}")
         except InvalidOperation:  # Catches Decimal conversion errors
             print("Invalid input! Please enter valid numbers.")
-        except ValueError as e:
-            print(f"Input error: {e}")
-        except ArithmeticError as e:  # Catches division-related errors (not likely for subtraction)
-            print(f"Math error: {e}")
         except Exception as e:  # pylint: disable=broad-exception-caught
             print(f"Unexpected error: {e}")
